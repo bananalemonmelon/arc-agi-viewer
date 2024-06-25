@@ -36,10 +36,11 @@
     <button onclick="tampil()">Show</button>
 </div>
 <style>
-    .board td {
-        width: 12px;
-        height: 12px;
+    .cell {
+        width: 8px;
+        height: 8px;
         border: 1px solid green;
+        border-collapse: collapse;
     }
 
     .board {
@@ -104,7 +105,7 @@
             var tr = createElement('tr');
             row.forEach(function (cell) {
                 var td = createElement('td');
-                td.className = 'symbol_' + cell;
+                td.className = 'cell symbol_' + cell;
                 tr.appendChild(td);
             });
             root.appendChild(tr);
