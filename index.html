@@ -36,16 +36,17 @@
     <button onclick="tampil()">Show</button>
 </div>
 <style>
-    .warna td {
-        width: 16px;
-        height: 16px;
+    .board td {
+        width: 12px;
+        height: 12px;
         border: 1px solid green;
     }
 
-    .warna {
+    .board {
         border-collapse: collapse;
-        margin-right: 20px;
+        display: inline-block;
         border: 5px double green;
+        margin: 2px;
     }
 
     .symbol_0 {
@@ -98,7 +99,7 @@
     }
     function tabel(grid) {
         var root = createElement('table');
-        root.className = 'warna';
+        root.className = 'board';
         grid.forEach(function (row) {
             var tr = createElement('tr');
             row.forEach(function (cell) {
@@ -111,16 +112,10 @@
         return root;
     }
     function pair(i, o) {
-        var ii = createElement('td');
-        ii.appendChild(i);
-        var oo = createElement('td');
-        oo.appendChild(o);
-        var tr = createElement('tr');
-        tr.appendChild(ii);
-        tr.appendChild(oo);
-        var table = createElement('table');
-        table.appendChild(tr);
-        return table;
+        var div = createElement('div');
+        div.appendChild(i);
+        div.appendChild(o);
+        return div;
     }
     function tampil() {
         var fold = document.getElementById('fold').value;
@@ -138,17 +133,17 @@
                         viewer.innerHTML = '';
                         for (var ii = 0; ii < json.train.length; ii++) {
                             var io = json.train[ii];
-                            viewer.appendChild(createElement('div', 'train:' + ii));
+                            viewer.appendChild(createElement('hr'));
+                            viewer.appendChild(createElement('div', 'train[' + ii + '] ' + (ii + 1)));
                             viewer.appendChild(pair(tabel(io.input), tabel(io.output)));
                         }
-                        viewer.append(createElement('hr'));
-                        viewer.append(createElement('hr'));
-                        viewer.append(createElement('hr'));
-                        viewer.append(createElement('hr'));
-                        viewer.append(createElement('hr'));
+                        viewer.appendChild(createElement('hr'));
+                        viewer.appendChild(createElement('hr'));
+                        viewer.appendChild(createElement('hr'));
                         for (var ii = 0; ii < json.test.length; ii++) {
                             var io = json.test[ii];
-                            viewer.appendChild(createElement('div', 'test:' + ii));
+                            viewer.appendChild(createElement('hr'));
+                            viewer.appendChild(createElement('div', 'test[' + ii + '] ' + (ii + 1)));
                             viewer.appendChild(pair(tabel(io.input), tabel(io.output)));
                         }
                     }
